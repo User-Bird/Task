@@ -1,6 +1,6 @@
 # TaskBoard - TP4 Angular
 
-Vercel: [https://task-eta-kohl-26.vercel.app/dashboard]
+Vercel: [https://task-eta-kohl-26.vercel.app]
 
 The Vercel deployment is for UI demonstration only. Data loading requires the local json-server backend.
 
