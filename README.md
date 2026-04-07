@@ -3,7 +3,7 @@
 ## Vercel
 
 Vercel: [https://task-eta-kohl-26.vercel.app]
-Pour que Vercel fonctionne, vous devez installer Repo et exécuter cette commande dans le terminal : 
+For Vercel to work, you need to install Repo and run this command in the terminal:
 ```npx json-server --watch db.json --port 3000```
 The Vercel deployment is for UI demonstration only. Data loading requires the local json-server backend.
 
