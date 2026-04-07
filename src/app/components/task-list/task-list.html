@@ -1,1 +1,48 @@
-<p>task-list works!</p>
+<app-header />
+
+<div class="task-list-page">
+  <div class="page-inner">
+    <div class="page-header">
+      <h1>Mes Tâches</h1>
+      <a routerLink="/tasks/new" class="btn-new">+ Nouvelle tâche</a>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <input type="text" placeholder="🔍 Rechercher..." [value]="search()" (input)="search.set($any($event.target).value)" />
+
+      <select [value]="filterStatus()" (change)="filterStatus.set($any($event.target).value)">
+        <option value="all">Tous les statuts</option>
+        <option value="todo">À faire</option>
+        <option value="in-progress">En cours</option>
+        <option value="done">Terminé</option>
+      </select>
+
+      <select [value]="filterPriority()" (change)="filterPriority.set($any($event.target).value)">
+        <option value="all">Toutes priorités</option>
+        <option value="high">Haute</option>
+        <option value="medium">Moyenne</option>
+        <option value="low">Basse</option>
+      </select>
+
+      <select [value]="sortBy()" (change)="sortBy.set($any($event.target).value)">
+        <option value="dueDate">Trier par date</option>
+        <option value="priority">Trier par priorité</option>
+        <option value="title">Trier par titre</option>
+      </select>
+    </div>
+
+    <!-- Task Grid -->
+    @if (taskService.loading()) {
+      <div class="loading">Chargement des tâches...</div>
+    } @else if (filteredTasks().length === 0) {
+      <div class="empty">Aucune tâche trouvée</div>
+    } @else {
+      <div class="task-grid">
+        @for (task of filteredTasks(); track task.id) {
+          <app-task-card [task]="task" />
+        }
+      </div>
+    }
+  </div>
+</div>

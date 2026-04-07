@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Toast as ToastService } from '../../services/toast';
 
 @Component({
   selector: 'app-toast',
-  imports: [],
+  standalone: true,
   templateUrl: './toast.html',
-  styleUrl: './toast.css',
+  styleUrl: './toast.css'
 })
-export class Toast {}
+export class ToastComponent {
+  toastService = inject(ToastService);
+}

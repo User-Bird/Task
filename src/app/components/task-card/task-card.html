@@ -1,1 +1,32 @@
-<p>task-card works!</p>
+<div class="task-card" [class.overdue]="isOverdue">
+  <div class="card-header">
+    <span class="badge" [class]="'badge-' + task().status">
+      {{ task().status === 'todo' ? 'À faire' : task().status === 'in-progress' ? 'En cours' : 'Terminé' }}
+    </span>
+    <span class="priority" [class]="'priority-' + task().priority">
+      {{ task().priority === 'high' ? '🔴 Haute' : task().priority === 'medium' ? '🟡 Moyenne' : '🟢 Basse' }}
+    </span>
+  </div>
+
+  <h3 class="card-title">
+    <a [routerLink]="['/tasks', task().id]">{{ task().title }}</a>
+  </h3>
+  <p class="card-desc">{{ task().description }}</p>
+
+  <div class="card-footer">
+    <span class="due-date" [class.late]="isOverdue">
+      📅 {{ task().dueDate }}
+      @if (isOverdue) { <span class="late-tag">En retard</span> }
+    </span>
+
+    <div class="actions">
+      <select (change)="changeStatus($any($event.target).value)">
+        <option value="todo"       [selected]="task().status === 'todo'">À faire</option>
+        <option value="in-progress" [selected]="task().status === 'in-progress'">En cours</option>
+        <option value="done"       [selected]="task().status === 'done'">Terminé</option>
+      </select>
+      <a [routerLink]="['/tasks', task().id, 'edit']" class="btn-edit">✏️</a>
+      <button (click)="confirmDelete()" class="btn-delete">🗑️</button>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,55 @@
-<p>dashboard works!</p>
+<app-header />
+
+<div class="dashboard">
+  <div class="dashboard-inner">
+    <h1>Bonjour, {{ auth.userName() }} 👋</h1>
+    <p class="subtitle">Voici un aperçu de vos tâches</p>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <app-stats-card label="Total" [count]="taskService.totalCount()" color="indigo" icon="📋" />
+      <app-stats-card label="À faire" [count]="taskService.todoCount()" color="yellow" icon="⏳" />
+      <app-stats-card label="En cours" [count]="taskService.inProgressCount()" color="blue" icon="🔄" />
+      <app-stats-card label="Terminées" [count]="taskService.doneCount()" color="green" icon="✅" />
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-section">
+      <div class="progress-header">
+        <span>Taux de complétion</span>
+        <span class="rate">{{ taskService.completionRate() }}%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="taskService.completionRate()"></div>
+      </div>
+    </div>
+
+    <!-- Recent Tasks -->
+    <div class="recent-section">
+      <div class="section-header">
+        <h2>Tâches récentes</h2>
+        <a routerLink="/tasks">Voir tout →</a>
+      </div>
+
+      @if (taskService.loading()) {
+        <div class="loading">Chargement...</div>
+      } @else if (recentTasks.length === 0) {
+        <div class="empty">Aucune tâche pour l'instant</div>
+      } @else {
+        <div class="recent-list">
+          @for (task of recentTasks; track task.id) {
+            <div class="recent-item">
+              <div class="recent-info">
+                <span class="recent-title">{{ task.title }}</span>
+                <span class="badge" [class]="'badge-' + task.status">
+                  {{ task.status === 'todo' ? 'À faire' : task.status === 'in-progress' ? 'En cours' : 'Terminé' }}
+                </span>
+              </div>
+              <span class="recent-date">{{ task.dueDate }}</span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

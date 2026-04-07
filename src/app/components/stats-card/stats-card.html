@@ -1,1 +1,7 @@
-<p>stats-card works!</p>
+<div class="stats-card" [class]="'card-' + color()">
+  <div class="icon">{{ icon() }}</div>
+  <div class="info">
+    <span class="count">{{ count() }}</span>
+    <span class="label">{{ label() }}</span>
+  </div>
+</div>

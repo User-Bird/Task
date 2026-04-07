@@ -1,0 +1,21 @@
+.stats-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  border-left: 5px solid #4f46e5;
+  transition: transform 0.2s;
+}
+.stats-card:hover { transform: translateY(-2px); }
+
+.card-indigo { border-left-color: #4f46e5; }
+.card-yellow { border-left-color: #f59e0b; }
+.card-blue   { border-left-color: #3b82f6; }
+.card-green  { border-left-color: #10b981; }
+
+.icon { font-size: 2rem; }
+.count { font-size: 2rem; font-weight: 700; color: #111827; display: block; }
+.label { font-size: 0.85rem; color: #6b7280; font-weight: 500; }

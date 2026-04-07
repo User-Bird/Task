@@ -1,1 +1,36 @@
-<p>task-detail works!</p>
+<app-header />
+
+<div class="detail-page">
+  <div class="detail-inner">
+    @if (loading()) {
+      <div class="loading">Chargement...</div>
+    } @else if (task()) {
+      <div class="detail-card">
+        <div class="detail-header">
+          <div>
+            <span class="badge" [class]="'badge-' + task()!.status">
+              {{ task()!.status === 'todo' ? 'À faire' : task()!.status === 'in-progress' ? 'En cours' : 'Terminé' }}
+            </span>
+            <span class="priority" [class]="'priority-' + task()!.priority">
+              {{ task()!.priority === 'high' ? '🔴 Haute' : task()!.priority === 'medium' ? '🟡 Moyenne' : '🟢 Basse' }}
+            </span>
+          </div>
+          <div class="header-actions">
+            <a [routerLink]="['/tasks', task()!.id, 'edit']" class="btn-edit">✏️ Modifier</a>
+            <button (click)="delete()" class="btn-delete">🗑️ Supprimer</button>
+          </div>
+        </div>
+
+        <h1>{{ task()!.title }}</h1>
+        <p class="description">{{ task()!.description }}</p>
+
+        <div class="meta">
+          <div class="meta-item"><span>📅 Échéance</span><strong>{{ task()!.dueDate }}</strong></div>
+          <div class="meta-item"><span>📆 Créée le</span><strong>{{ task()!.createdAt }}</strong></div>
+        </div>
+
+        <a routerLink="/tasks" class="btn-back">← Retour aux tâches</a>
+      </div>
+    }
+  </div>
+</div>

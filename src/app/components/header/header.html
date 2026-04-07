@@ -1,1 +1,17 @@
-<p>header works!</p>
+<header class="header">
+  <div class="header-inner">
+    <a routerLink="/dashboard" class="logo">TaskBoard</a>
+
+    <nav>
+      @if (auth.isAuthenticated()) {
+        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+        <a routerLink="/tasks" routerLinkActive="active">Tâches</a>
+        <span class="username">👤 {{ auth.userName() }}</span>
+        <button (click)="auth.logout()">Déconnexion</button>
+      } @else {
+        <a routerLink="/login" routerLinkActive="active">Connexion</a>
+        <a routerLink="/register" routerLinkActive="active">S'inscrire</a>
+      }
+    </nav>
+  </div>
+</header>

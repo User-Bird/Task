@@ -1,0 +1,48 @@
+.dashboard { padding: 2rem 1rem; background: #f0f4ff; min-height: calc(100vh - 60px); }
+.dashboard-inner { max-width: 1100px; margin: 0 auto; }
+
+h1 { font-size: 1.8rem; color: #111827; margin-bottom: 0.25rem; }
+.subtitle { color: #6b7280; margin-bottom: 2rem; }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.progress-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin-bottom: 2rem;
+}
+.progress-header { display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: #374151; font-weight: 500; }
+.rate { color: #4f46e5; font-weight: 700; }
+.progress-bar { background: #e5e7eb; border-radius: 999px; height: 12px; overflow: hidden; }
+.progress-fill { background: #4f46e5; height: 100%; border-radius: 999px; transition: width 0.5s ease; }
+
+.recent-section { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.section-header h2 { font-size: 1.1rem; color: #111827; }
+.section-header a { color: #4f46e5; text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+
+.recent-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+.recent-item:last-child { border-bottom: none; }
+.recent-info { display: flex; align-items: center; gap: 0.75rem; }
+.recent-title { font-weight: 500; color: #374151; }
+.recent-date { font-size: 0.8rem; color: #9ca3af; }
+
+.badge { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; }
+.badge-todo { background: #fef3c7; color: #d97706; }
+.badge-in-progress { background: #dbeafe; color: #2563eb; }
+.badge-done { background: #d1fae5; color: #059669; }
+
+.loading, .empty { text-align: center; color: #9ca3af; padding: 2rem; }

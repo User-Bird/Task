@@ -1,0 +1,26 @@
+.detail-page { padding: 2rem 1rem; background: #f0f4ff; min-height: calc(100vh - 60px); }
+.detail-inner { max-width: 700px; margin: 0 auto; }
+
+.detail-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.1); }
+
+.detail-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.header-actions { display: flex; gap: 0.75rem; }
+
+.badge { font-size: 0.8rem; padding: 0.3rem 0.7rem; border-radius: 999px; font-weight: 600; margin-right: 0.5rem; }
+.badge-todo { background: #fef3c7; color: #d97706; }
+.badge-in-progress { background: #dbeafe; color: #2563eb; }
+.badge-done { background: #d1fae5; color: #059669; }
+
+h1 { font-size: 1.6rem; color: #111827; margin-bottom: 1rem; }
+.description { color: #6b7280; line-height: 1.6; margin-bottom: 1.5rem; }
+
+.meta { display: flex; gap: 2rem; margin-bottom: 2rem; }
+.meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.meta-item span { font-size: 0.8rem; color: #9ca3af; }
+.meta-item strong { color: #374151; }
+
+.btn-edit { background: #e0e7ff; color: #4f46e5; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+.btn-delete { background: #fee2e2; color: #dc2626; padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+.btn-back { color: #4f46e5; text-decoration: none; font-weight: 500; }
+
+.loading { text-align: center; color: #9ca3af; padding: 3rem; }

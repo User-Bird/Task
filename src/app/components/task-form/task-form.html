@@ -1,1 +1,57 @@
-<p>task-form works!</p>
+<app-header />
+
+<div class="form-page">
+  <div class="form-card">
+    <h1>{{ isEditMode ? 'Modifier la tâche' : 'Nouvelle tâche' }}</h1>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Titre *</label>
+        <input type="text" formControlName="title" placeholder="Titre de la tâche" />
+        @if (form.get('title')?.invalid && form.get('title')?.touched) {
+          <span class="error">Minimum 3 caractères</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Description</label>
+        <textarea formControlName="description" rows="3" placeholder="Description..."></textarea>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label>Statut</label>
+          <select formControlName="status">
+            <option value="todo">À faire</option>
+            <option value="in-progress">En cours</option>
+            <option value="done">Terminé</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Priorité</label>
+          <select formControlName="priority">
+            <option value="low">Basse</option>
+            <option value="medium">Moyenne</option>
+            <option value="high">Haute</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Date d'échéance *</label>
+        <input type="date" formControlName="dueDate" />
+        @if (form.get('dueDate')?.invalid && form.get('dueDate')?.touched) {
+          <span class="error">Date requise</span>
+        }
+      </div>
+
+      <div class="btn-row">
+        <a routerLink="/tasks" class="btn-cancel">Annuler</a>
+        <button type="submit" [disabled]="form.invalid || loading">
+          {{ loading ? 'Sauvegarde...' : (isEditMode ? 'Mettre à jour' : 'Créer') }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

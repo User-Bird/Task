@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { Auth } from '../services/auth';
 
 export const authGuard: CanActivateFn = () => {
-  const authService = inject(Auth);
+  const auth = inject(Auth);
   const router = inject(Router);
 
   if (auth.isAuthenticated()) {
@@ -15,10 +15,10 @@ export const authGuard: CanActivateFn = () => {
 };
 
 export const guestGuard: CanActivateFn = () => {
-  const authService = inject(Auth);
+  const auth = inject(Auth);
   const router = inject(Router);
 
-  if (!authService.isAuthenticated()) {
+  if (!auth.isAuthenticated()) {
     return true;
   }
 

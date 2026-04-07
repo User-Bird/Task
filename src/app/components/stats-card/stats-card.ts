@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-stats-card',
-  imports: [],
+  standalone: true,
   templateUrl: './stats-card.html',
-  styleUrl: './stats-card.css',
+  styleUrl: './stats-card.css'
 })
-export class StatsCard {}
+export class StatsCard {
+  label = input.required<string>();
+  count = input.required<number>();
+  color = input<string>('indigo');
+  icon = input<string>('📋');
+}

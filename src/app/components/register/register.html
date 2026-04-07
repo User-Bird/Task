@@ -1,1 +1,50 @@
-<p>register works!</p>
+<div class="register-wrapper">
+  <div class="register-card">
+    <h1>TaskBoard</h1>
+    <h2>Créer un compte</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Nom complet</label>
+        <input type="text" formControlName="name" placeholder="Ahmed Bennani" />
+        @if (form.get('name')?.invalid && form.get('name')?.touched) {
+          <span class="error">Minimum 2 caractères</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="ahmed@mail.com" />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+          <span class="error">Email invalide</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Mot de passe</label>
+        <input type="password" formControlName="password" placeholder="••••••" />
+        @if (form.get('password')?.invalid && form.get('password')?.touched) {
+          <span class="error">Minimum 6 caractères</span>
+        }
+      </div>
+
+      <div class="field">
+        <label>Confirmer le mot de passe</label>
+        <input type="password" formControlName="confirm" placeholder="••••••" />
+        @if (form.hasError('mismatch') && form.get('confirm')?.touched) {
+          <span class="error">Les mots de passe ne correspondent pas</span>
+        }
+      </div>
+
+      @if (errorMsg) {
+        <div class="alert-error">{{ errorMsg }}</div>
+      }
+
+      <button type="submit" [disabled]="loading || form.invalid">
+        {{ loading ? 'Inscription...' : 'S\'inscrire' }}
+      </button>
+    </form>
+
+    <p class="link">Déjà un compte ? <a routerLink="/login">Se connecter</a></p>
+  </div>
+</div>
