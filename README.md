@@ -1,10 +1,13 @@
 # TaskBoard - TP4 Angular
 
-Vercel: [https://task-eta-kohl-26.vercel.app]
+## Vercel
 
+Vercel: [https://task-eta-kohl-26.vercel.app]
+Pour que Vercel fonctionne, vous devez installer Repo et exécuter cette commande dans le terminal : 
+```npx json-server --watch db.json --port 3000```
 The Vercel deployment is for UI demonstration only. Data loading requires the local json-server backend.
 
-## Installation
+## Ou faites-le simplement Installation :
 
 1. Clone the repository:
 ```git clone https://github.com/User-Bird/Task.git```
