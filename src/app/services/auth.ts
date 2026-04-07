@@ -26,26 +26,24 @@ export class Auth {
   }
 
   login(credentials: LoginRequest): Observable<User> {
-    return this.http
-      .get<User[]>(`${this.apiUrl}?email=${credentials.email}&password=${credentials.password}`)
-      .pipe(
-        map((users) => {
-          if (users.length === 0) {
-            throw new Error('Email ou mot de passe incorrect');
-          }
-          return users[0];
-        }),
-        tap((user) => {
-          const token = 'fake-jwt-' + btoa(user.email + ':' + Date.now());
-          this._authState.set({
-            user: { id: user.id, name: user.name, email: user.email },
-            token,
-            isAuthenticated: true,
-          });
-          localStorage.setItem('auth', JSON.stringify(this._authState()));
-        }),
-        catchError((err) => throwError(() => err)),
-      );
+    const cleanEmail = credentials.email.trim();
+    const cleanPassword = credentials.password.trim();
+    return this.http.get<User[]>(`${this.apiUrl}?email=${cleanEmail}`).pipe(
+      map((users) => {
+        const user = users[0]; // Get the first matched user
+
+        // 3. Verify the password matches
+        if (user && user.password === cleanPassword) {
+          const authData = { user, token: 'fake-jwt-token', isAuthenticated: true };
+          this._authState.set(authData);
+          localStorage.setItem('auth', JSON.stringify(authData));
+          return user;
+        }
+
+        // If it fails, throw the error to the component
+        throw new Error('Email ou mot de passe incorrect');
+      }),
+    );
   }
 
   register(name: string, email: string, password: string): Observable<User> {
