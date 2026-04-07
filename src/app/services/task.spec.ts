@@ -76,4 +76,25 @@ describe('TaskService', () => {
     expect(service.todoCount()).toBe(1);
     expect(service.totalCount()).toBe(3);
   });
+  it('should create a task (create)', () => {
+    const newTask = { title: 'New Task', description: '', status: 'todo' as any, priority: 'low' as any, dueDate: '2026-05-01', userId: 1 };
+    const createdTask = { id: 99, ...newTask, userId: 1, createdAt: '2026-04-07' };
+
+    service.create(newTask).subscribe(task => {
+      expect(task.title).toBe('New Task');
+    });
+
+    const req = httpMock.expectOne('http://localhost:3000/tasks');
+    expect(req.request.method).toBe('POST');
+    req.flush(createdTask);
+  });
+
+  it('should update task status (updateStatus)', () => {
+    service.updateStatus(1, 'done').subscribe();
+
+    const req = httpMock.expectOne('http://localhost:3000/tasks/1');
+    expect(req.request.method).toBe('PATCH');
+    expect(req.request.body).toEqual({ status: 'done' });
+    req.flush({ id: 1, status: 'done' });
+  });
 });
