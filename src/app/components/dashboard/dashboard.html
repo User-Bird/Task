@@ -31,24 +31,28 @@
         <a routerLink="/tasks">Voir tout →</a>
       </div>
 
-      @if (taskService.loading()) {
-        <div class="loading">Chargement...</div>
-      } @else if (recentTasks.length === 0) {
-        <div class="empty">Aucune tâche pour l'instant</div>
-      } @else {
-        <div class="recent-list">
-          @for (task of recentTasks; track task.id) {
-            <div class="recent-item">
-              <div class="recent-info">
-                <span class="recent-title">{{ task.title }}</span>
-                <span class="badge" [class]="'badge-' + task.status">
-                  {{ task.status === 'todo' ? 'À faire' : task.status === 'in-progress' ? 'En cours' : 'Terminé' }}
-                </span>
+      @defer (on viewport) {
+        @if (taskService.loading()) {
+          <div class="loading">Chargement...</div>
+        } @else if (recentTasks.length === 0) {
+          <div class="empty">Aucune tâche pour l'instant</div>
+        } @else {
+          <div class="recent-list">
+            @for (task of recentTasks; track task.id) {
+              <div class="recent-item">
+                <div class="recent-info">
+                  <span class="recent-title">{{ task.title }}</span>
+                  <span class="badge" [class]="'badge-' + task.status">
+                    {{ task.status === 'todo' ? 'À faire' : task.status === 'in-progress' ? 'En cours' : 'Terminé' }}
+                  </span>
+                </div>
+                <span class="recent-date">{{ task.dueDate }}</span>
               </div>
-              <span class="recent-date">{{ task.dueDate }}</span>
-            </div>
-          }
-        </div>
+            }
+          </div>
+        }
+      } @placeholder {
+        <div class="loading">Chargement des tâches récentes...</div>
       }
     </div>
   </div>
