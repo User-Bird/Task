@@ -22,6 +22,7 @@ export class TaskForm implements OnInit {
   isEditMode = false;
   taskId: number | null = null;
   loading = false;
+  isSubmitted = false; // Add this property
 
   form = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(3)]],
@@ -50,6 +51,7 @@ export class TaskForm implements OnInit {
     if (this.isEditMode && this.taskId) {
       this.taskService.update(this.taskId, value).subscribe({
         next: () => {
+          this.isSubmitted = true; // Set to true before navigating
           this.toast.success('Tâche mise à jour !');
           this.router.navigate(['/tasks']);
         },
@@ -58,6 +60,7 @@ export class TaskForm implements OnInit {
     } else {
       this.taskService.create(value).subscribe({
         next: () => {
+          this.isSubmitted = true; // Set to true before navigating
           this.toast.success('Tâche créée !');
           this.router.navigate(['/tasks']);
         },

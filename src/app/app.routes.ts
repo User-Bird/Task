@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard, guestGuard } from './guards/auth-guard';
+import { unsavedChangesGuard } from './guards/unsaved-changes-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -50,5 +51,19 @@ export const routes: Routes = [
     path: '**',
     loadComponent: () =>
       import('./components/not-found/not-found').then(m => m.NotFound)
+  },
+  {
+    path: 'tasks/new',
+    loadComponent: () =>
+      import('./components/task-form/task-form').then(m => m.TaskForm),
+    canActivate: [authGuard],
+    canDeactivate: [unsavedChangesGuard] // Add this
+  },
+  {
+    path: 'tasks/:id/edit',
+    loadComponent: () =>
+      import('./components/task-form/task-form').then(m => m.TaskForm),
+    canActivate: [authGuard],
+    canDeactivate: [unsavedChangesGuard] // Add this
   }
 ];
