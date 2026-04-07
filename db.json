@@ -1,0 +1,68 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Ahmed Bennani",
+      "email": "ahmed@mail.com",
+      "password": "123456"
+    },
+    {
+      "id": 2,
+      "name": "Sara Alaoui",
+      "email": "sara@mail.com",
+      "password": "123456"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Configurer le projet Angular",
+      "description": "Installer Angular CLI et creer le projet task-board",
+      "status": "done",
+      "priority": "high",
+      "dueDate": "2026-04-01",
+      "userId": 1,
+      "createdAt": "2026-03-25"
+    },
+    {
+      "id": 2,
+      "title": "Implementer le service d'authentification",
+      "description": "Creer AuthService avec login, register et logout",
+      "status": "in-progress",
+      "priority": "high",
+      "dueDate": "2026-04-05",
+      "userId": 1,
+      "createdAt": "2026-03-26"
+    },
+    {
+      "id": 3,
+      "title": "Creer les composants du dashboard",
+      "description": "Dashboard avec statistiques et graphiques",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2026-04-10",
+      "userId": 1,
+      "createdAt": "2026-03-27"
+    },
+    {
+      "id": 4,
+      "title": "Ecrire les tests unitaires",
+      "description": "Tester TaskService et AuthService avec Jasmine",
+      "status": "todo",
+      "priority": "low",
+      "dueDate": "2026-04-15",
+      "userId": 2,
+      "createdAt": "2026-03-28"
+    },
+    {
+      "id": 5,
+      "title": "Deployer sur Vercel",
+      "description": "Build de production et deploiement",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2026-04-20",
+      "userId": 2,
+      "createdAt": "2026-03-29"
+    }
+  ]
+}
