@@ -32,7 +32,6 @@ export class Auth {
       map((users) => {
         const user = users[0]; // Get the first matched user
 
-        // 3. Verify the password matches
         if (user && user.password === cleanPassword) {
           const authData = { user, token: 'fake-jwt-token', isAuthenticated: true };
           this._authState.set(authData);
@@ -83,4 +82,5 @@ export class Auth {
       localStorage.removeItem('auth');
     }
   }
+  //the process of restoring the user's session from the hard drive into the active application memory.
 }

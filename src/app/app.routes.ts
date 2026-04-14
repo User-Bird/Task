@@ -48,12 +48,12 @@ export const routes: Routes = [
     path: 'tasks/new',
     loadComponent: () => import('./components/task-form/task-form').then((m) => m.TaskForm),
     canActivate: [authGuard],
-    canDeactivate: [unsavedChangesGuard], // Add this
+    canDeactivate: [unsavedChangesGuard],
   },
   {
     path: 'tasks/:id/edit',
     loadComponent: () => import('./components/task-form/task-form').then((m) => m.TaskForm),
     canActivate: [authGuard],
-    canDeactivate: [unsavedChangesGuard], // Add this
+    canDeactivate: [unsavedChangesGuard],
   },
 ];
