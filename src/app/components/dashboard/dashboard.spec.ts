@@ -1,8 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-
 import { Dashboard } from './dashboard';
+
+// MOCK IntersectionObserver — the test runs in Node.js which has no browser APIs.
+// @defer (on viewport) in your template uses IntersectionObserver to watch when
+// elements scroll into view. Without this mock the whole test crashes.
+(globalThis as any).IntersectionObserver = class {
+  observe() {} // called when Angular registers an element to watch
+  unobserve() {} // called when Angular stops watching an element
+  disconnect() {} // called when Angular tears down the component
+};
 
 describe('Dashboard', () => {
   let component: Dashboard;
@@ -11,7 +19,7 @@ describe('Dashboard', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Dashboard],
-      providers: [provideRouter([]), provideHttpClient()] // <-- ADD THIS LINE
+      providers: [provideRouter([]), provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Dashboard);

@@ -1,7 +1,8 @@
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, map, tap, catchError, throwError } from 'rxjs';
+// ADD switchMap, of, throwError to the import
+import { Observable, switchMap, of, throwError, tap } from 'rxjs';
 import { User, LoginRequest, AuthState } from '../models/user';
 
 @Injectable({ providedIn: 'root' })
@@ -29,22 +30,22 @@ export class Auth {
     const cleanEmail = credentials.email.trim();
     const cleanPassword = credentials.password.trim();
     return this.http.get<User[]>(`${this.apiUrl}?email=${cleanEmail}`).pipe(
-      map((users) => {
-        const user = users[0]; // Get the first matched user
-
+      // CHANGED: switchMap instead of map, throwError instead of throw
+      switchMap((users) => {
+        const user = users[0];
         if (user && user.password === cleanPassword) {
           const authData = { user, token: 'fake-jwt-token', isAuthenticated: true };
           this._authState.set(authData);
           localStorage.setItem('auth', JSON.stringify(authData));
-          return user;
+          return of(user); // wrap the success value in an observable
         }
-
-        // If it fails, throw the error to the component
-        throw new Error('Email ou mot de passe incorrect');
+        // PROPER RxJS error — doesn't leak out of the stream
+        return throwError(() => new Error('Email ou mot de passe incorrect'));
       }),
     );
   }
 
+  // register, logout, loadFromStorage — unchanged
   register(name: string, email: string, password: string): Observable<User> {
     return this.http.post<User>(this.apiUrl, { name, email, password }).pipe(
       tap((user) => {
@@ -70,7 +71,6 @@ export class Auth {
       const data = localStorage.getItem('auth');
       if (data) {
         const parsed = JSON.parse(data);
-        // Add this safety check: make sure it's actually an object and not null
         if (parsed && typeof parsed === 'object') {
           this._authState.set(parsed);
         } else {
@@ -82,5 +82,4 @@ export class Auth {
       localStorage.removeItem('auth');
     }
   }
-  //the process of restoring the user's session from the hard drive into the active application memory.
 }
